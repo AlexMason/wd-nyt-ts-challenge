@@ -145,25 +145,7 @@ class Nyt extends React.Component<NytProps, NytState> {
               return (
                 <Row>
                   <Col>
-                    <a href={article.web_url} target="_blank">
-                      <Card>
-                        <Card.Img
-                          variant="top"
-                          src={`https://www.nytimes.com/${article.multimedia[0].url}`}
-                        />
-                        <Card.Body>
-                          <Card.Title>{article.headline.main}</Card.Title>
-                          <Card.Text>
-                            Keywords:{" "}
-                            {article.keywords
-                              .map((keyword) => {
-                                return keyword.value;
-                              })
-                              .join(", ")}
-                          </Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </a>
+                    <DisplayArticle article={article} />
                   </Col>
                 </Row>
               );
@@ -176,3 +158,31 @@ class Nyt extends React.Component<NytProps, NytState> {
 }
 
 export default Nyt;
+
+type DisplayArticleProps = {
+  article: IArticle;
+};
+
+const DisplayArticle = (props: DisplayArticleProps) => {
+  return (
+    <a href={props.article.web_url} target="_blank">
+      <Card>
+        <Card.Img
+          variant="top"
+          src={`https://www.nytimes.com/${props.article.multimedia[0].url}`}
+        />
+        <Card.Body>
+          <Card.Title>{props.article.headline.main}</Card.Title>
+          <Card.Text>
+            Keywords:{" "}
+            {props.article.keywords
+              .map((keyword) => {
+                return keyword.value;
+              })
+              .join(", ")}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </a>
+  );
+};
